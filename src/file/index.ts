@@ -1,5 +1,3 @@
-import * as FileUtil from './file-util';
+import * as FileUtil from "./file-util";
 
-export {
-  FileUtil
-};
+export { FileUtil };

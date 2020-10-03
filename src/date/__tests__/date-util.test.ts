@@ -1,13 +1,13 @@
-import { DateUtil } from '../';
+import { DateUtil } from "../";
 
-describe('DateUtil', () => {
+describe("DateUtil", () => {
   const date = new Date(Date.now());
-  
-  it('toHHMM', () => {
+
+  it("toHHMM", () => {
     expect(DateUtil.toHHMM(date).length).toBe(4);
   });
 
-  it('toYYYYMMDD', () => {
+  it("toYYYYMMDD", () => {
     expect(DateUtil.toYYYYMMDD(date).length).toBe(8);
   });
 });

@@ -1,3 +1,3 @@
-import * as ArrayUtil from "./array-util";
+import * as ArrayUtils from './arrayUtils';
 
-export { ArrayUtil };
+export { ArrayUtils };

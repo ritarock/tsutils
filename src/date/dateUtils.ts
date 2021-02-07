@@ -21,3 +21,13 @@ export const nowYYYYMMDD = (): string => {
 export const timeSpan = (from: Date, to: Date): number => {
     return Math.floor((to.getTime() - from.getTime()) / 1000);
 };
+
+export const toYYYY_MM_DD = (date: Date): string => {
+    return (
+        String(date.getFullYear()) +
+        '-' +
+        ('0' + String(date.getMonth() + 1)).slice(-2) +
+        '-' +
+        ('0' + String(date.getDate())).slice(-2)
+    );
+};

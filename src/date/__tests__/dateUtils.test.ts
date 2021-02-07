@@ -20,4 +20,8 @@ describe('DateUtils', () => {
         const toDate = new Date(2021, 1, 1, 1, 0, 0);
         expect(DateUtils.timeSpan(fromDate, toDate)).toBe(3600);
     });
+
+    it('toYYYY_MM_DD', () => {
+        expect(DateUtils.toYYYY_MM_DD(date).length).toBe(10);
+    });
 });

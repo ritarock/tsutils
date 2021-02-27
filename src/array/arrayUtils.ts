@@ -19,3 +19,7 @@ export const avarageOfArray = (array: number[]): number => {
 export const sortArray = (array: number[]): number[] => {
     return array.sort((a, b) => a - b);
 };
+
+export const reverseSortArray = (array: number[]): number[] => {
+    return array.sort((a, b) => b - a);
+};

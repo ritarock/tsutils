@@ -1,4 +1,3 @@
-import { number } from 'yargs';
 import { ArrayUtils } from '../';
 
 describe('ArrayUtils', () => {
@@ -24,5 +23,11 @@ describe('ArrayUtils', () => {
         array = [3, 1, 2, 10, 22];
         const result: number[] = [1, 2, 3, 10, 22];
         expect(ArrayUtils.sortArray(array)).toEqual(result);
+    });
+
+    it('reverseSortArray', () => {
+        array = [3, 1, 2, 10, 22];
+        const result: number[] = [22, 10, 3, 2, 1];
+        expect(ArrayUtils.reverseSortArray(array)).toEqual(result);
     });
 });

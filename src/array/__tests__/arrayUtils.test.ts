@@ -30,4 +30,9 @@ describe('ArrayUtils', () => {
         const result: number[] = [22, 10, 3, 2, 1];
         expect(ArrayUtils.reverseSortArray(array)).toEqual(result);
     });
+    it('uniqueArray', () => {
+        array = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5];
+        const result: number[] = [1, 2, 3, 4, 5];
+        expect(ArrayUtils.uniqueArray(array)).toEqual(result);
+    });
 });

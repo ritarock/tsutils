@@ -23,3 +23,8 @@ export const sortArray = (array: number[]): number[] => {
 export const reverseSortArray = (array: number[]): number[] => {
     return array.sort((a, b) => b - a);
 };
+
+export const uniqueArray = <T>(array: Array<T>): Array<T> => {
+    const setArray = new Set(array);
+    return [...setArray];
+};

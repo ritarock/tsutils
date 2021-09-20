@@ -36,3 +36,15 @@ Deno.test("toYYYY_MM_DD_HH_MM_SS", () => {
   const expected = "2021-01-01 00:00:00";
   assertEquals(actual, expected);
 });
+
+Deno.test("getBeginningOfMonth", () => {
+  const actual = DateUtils.getBeginningOfMonth();
+  const expected = "20210901";
+  assertEquals(actual, expected);
+});
+
+Deno.test("getEndOfMonth", () => {
+  const actual = DateUtils.getEndOfMonth();
+  const expected = "20210931";
+  assertEquals(actual, expected);
+});

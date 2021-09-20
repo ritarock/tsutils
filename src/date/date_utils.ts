@@ -29,3 +29,16 @@ export const toYYYY_MM_DD_HH_MM_SS = (date: Date) => {
     ("00" + date.getMinutes()).slice(-2)
   }:${("00" + date.getSeconds()).slice(-2)}`;
 };
+
+export const getBeginningOfMonth = () => {
+  const now = new Date();
+  const t = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0, 0);
+  return toYYYYMMDD(t);
+};
+
+export const getEndOfMonth = () => {
+  const now = new Date();
+  const t = new Date(now.getFullYear(), now.getMonth() + 2, 1, 0, 0, 0, 0);
+  t.setMinutes(t.getMinutes() - 1);
+  return toYYYYMMDD(t);
+};

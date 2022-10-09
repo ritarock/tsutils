@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.106.0/testing/asserts.ts";
-import * as DateUtils from "./date_utils.ts";
+import * as DateUtils from "./date.ts";
 
 Deno.test("toYYYYMMDD", () => {
   const date = new Date(2021, 1, 1, 0, 0, 0, 0);
@@ -38,13 +38,15 @@ Deno.test("toYYYY_MM_DD_HH_MM_SS", () => {
 });
 
 Deno.test("getBeginningOfMonth", () => {
-  const actual = DateUtils.getBeginningOfMonth();
-  const expected = "20210901";
+  const date = new Date(2021, 1, 10, 0, 0, 0, 0);
+  const actual = DateUtils.getBeginningOfMonth(date);
+  const expected = "20210101";
   assertEquals(actual, expected);
 });
 
 Deno.test("getEndOfMonth", () => {
-  const actual = DateUtils.getEndOfMonth();
-  const expected = "20210931";
+  const date = new Date(2021, 1, 10, 0, 0, 0, 0);
+  const actual = DateUtils.getEndOfMonth(date);
+  const expected = "20210128";
   assertEquals(actual, expected);
 });

@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std@0.106.0/testing/asserts.ts";
 import { existsSync } from "https://deno.land/std@0.106.0/fs/mod.ts";
-import * as FileUtils from "./file_utils.ts";
+import * as FileUtils from "./file.ts";
 
 Deno.test("read", () => {
   const actual = FileUtils.read("test_data/readfile.txt");

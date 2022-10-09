@@ -2,9 +2,9 @@ import {
   assertArrayIncludes,
   assertEquals,
 } from "https://deno.land/std@0.106.0/testing/asserts.ts";
-import * as ArrayUtils from "./array_utils.ts";
+import * as ArrayUtils from "./array.ts";
 
-Deno.test("srotArray", () => {
+Deno.test("sortArray", () => {
   const arr = [5, 4, 3, 2, 1];
   const actual = ArrayUtils.sortArray(arr);
   const actualValue = actual[0];

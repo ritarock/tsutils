@@ -1,38 +1,76 @@
 import * as DateUtil from "./date";
 
-test("toYYYYMMDD", () => {
-  const now = new Date(2023, 8, 1, 0, 0, 0, 0);
-  const expected = "20230801";
-  const actual = DateUtil.toYYYYMMDD(now);
-  expect(actual).toEqual(expected);
+describe("toYYYYMMDD", () => {
+  test("succeed", () => {
+    const now = new Date(2025, 10, 10);
+    const want = "20251010";
+    const got = DateUtil.toYYYYMMDD(now);
+    expect(got).toEqual(want);
+  });
 });
 
-test("toYYYY_MM_DD", () => {
-  const now = new Date(2023, 8, 1, 0, 0, 0, 0);
-  const expected = "2023-08-01";
-  const actual = DateUtil.toYYYY_MM_DD(now);
-  expect(actual).toEqual(expected);
+describe("toYYYY_MM_DD", () => {
+  test("succeed", () => {
+    const now = new Date(2025, 10, 10);
+    const want = "2025-10-10";
+    const got = DateUtil.toYYYY_MM_DD(now);
+    expect(got).toEqual(want);
+  });
 });
 
-test("timeSpan", () => {
-  const from = new Date(2023, 8, 1, 0, 0, 0, 0);
-  const to = new Date(2023, 8, 1, 1, 0, 0, 0);
-  const expected = 3600;
-  const actual = DateUtil.timeSpan(from, to);
-  expect(actual).toEqual(expected);
+describe("timeSpan", () => {
+  test("succeed: to < from", () => {
+    const from = new Date(2025, 10, 1, 0, 0, 0, 0);
+    const to = new Date(2025, 10, 1, 9, 0, 0, 0);
+    const want = 9;
+    const got = DateUtil.timeSpan(from, to);
+    expect(got).toEqual(want);
+  });
+
+  test("succeed: to > from", () => {
+    const from = new Date(2025, 10, 1, 0, 1, 0, 0);
+    const to = new Date(2025, 10, 1, 0, 0, 0, 0);
+    const want = 0;
+    const got = DateUtil.timeSpan(from, to);
+    expect(got).toEqual(want);
+  });
 });
 
-test("getBeginningOfMonth", () => {
-  const now = new Date(2023, 8, 15, 0, 0, 0, 0);
-  const expected = new Date(2023, 8, 1, 0, 0, 0, 0);
-  const actual = DateUtil.getBeginningOfMonth(now);
-  expect(DateUtil.toYYYYMMDD(actual)).toEqual(DateUtil.toYYYYMMDD(expected));
+describe("getMonthStartDate", () => {
+  test("succeed", () => {
+    const date = new Date(2025, 10, 10);
+    const want = new Date(2025, 10, 1);
+    const got = DateUtil.getMonthStartDate(date);
+    expect(got).toEqual(want);
+  });
 });
 
-test("getEndMonth", () => {
-  const august = 7;
-  const now = new Date(2023, august, 15, 0, 0, 0, 0);
-  const expected = new Date(2023, august, 31, 0, 0, 0, 0);
-  const actual = DateUtil.getEndMonth(now);
-  expect(actual).toEqual(expected);
+describe("getMonthEndDate", () => {
+  test("succeed", () => {
+    const october = 9;
+    const date = new Date(2025, october, 10);
+    const want = new Date(2025, october, 31);
+    const got = DateUtil.getMonthEndDate(date);
+    expect(got).toEqual(want);
+  });
+});
+
+describe("getNextMonthDate", () => {
+  test("succeed: 30th to 30th of next month", () => {
+    const may = 4;
+    const june = 5;
+    const date = new Date(2025, may, 30);
+    const want = new Date(2025, june, 30);
+    const got = DateUtil.getNextMonthDate(date);
+    expect(got).toEqual(want);
+  });
+
+  test("succeed: 31st to 30th of next month", () => {
+    const may = 4;
+    const june = 5;
+    const date = new Date(2025, may, 31);
+    const want = new Date(2025, june, 30);
+    const got = DateUtil.getNextMonthDate(date);
+    expect(got).toEqual(want);
+  });
 });

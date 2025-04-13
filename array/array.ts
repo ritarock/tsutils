@@ -1,100 +1,65 @@
-export const sort = (array: number[]): number[] => {
-  if (array.length === 0) return array;
-  return array.sort((a, b) => a - b);
+type Sortable = string | number | bigint;
+
+export const sort = <T extends Sortable>(array: T[]): T[] => {
+  return array.sort((a, b) => {
+    return a > b ? 1 : a === b ? 0 : -1;
+  });
 };
 
-export const reverseSort = (array: number[]): number[] => {
-  if (array.length === 0) return array;
-  return array.sort((a, b) => b - a);
+export const reverseSort = <T extends Sortable>(array: T[]): T[] => {
+  return array.sort((a, b) => {
+    return a < b ? 1 : a === b ? 0 : -1;
+  });
+};
+
+export const unique = <T>(array: T[]): T[] => {
+  const set = new Set(array);
+  return Array.from(set);
 };
 
 export const max = (array: number[]): number => {
   if (array.length === 0) return 0;
-  return array.reduce((a, b) => a > b ? a : b);
+  return Math.max(...array);
 };
 
 export const min = (array: number[]): number => {
   if (array.length === 0) return 0;
-  return array.reduce((a, b) => a < b ? a : b);
+  return Math.min(...array);
 };
 
 export const sum = (array: number[]): number => {
-  if (array.length === 0) return 0;
-  return array.reduce((a, b) => {
-    return a + b;
-  });
+  return array.reduce((pre, cur) => pre + cur, 0);
 };
 
-export const mean = (array: number[]): number => {
+export const average = (array: number[]): number => {
   if (array.length === 0) return 0;
   return sum(array) / array.length;
 };
 
 export const median = (array: number[]): number => {
-  const length = array.length;
-  if (length === 0) return 0;
+  const n = array.length;
+  if (n === 0) return 0;
 
-  const sorted = sort(array);
-  if (length % 2 === 0) {
-    const a = sorted[(length / 2) - 1];
-    const b = sorted[length / 2];
-    return (a + b) / 2;
-  } else {
-    return sorted[Math.trunc(length / 2)];
-  }
+  const sorted = sort([...array]);
+  const mid = Math.floor(sorted.length / 2);
+  if (n % 2 === 1) return sorted[mid];
+  return (sorted[mid - 1] + sorted[mid]) / 2;
 };
 
-export const mode = (array: number[]): number[] => {
+export const mode = <T>(array: T[]): T[] => {
   if (array.length === 0) return array;
+  const freqMap = new Map<T, number>();
+  for (const item of array) {
+    freqMap.set(item, (freqMap.get(item) || 0) + 1);
+  }
 
-  const m = new Map<number, number>();
-  for (const v of array) {
-    if (m.has(v)) {
-      m.set(v, m.get(v)! + 1);
-    } else {
-      m.set(v, 1);
+  const maxFreq = Math.max(...freqMap.values());
+  const modes: T[] = [];
+  for (const [item, freq] of freqMap.entries()) {
+    if (freq === maxFreq) {
+      modes.push(item);
     }
   }
 
-  const sortedMapByKey = new Map([...m.entries()].sort((a, b) => b[1] - a[1]));
-  // get first key (one of the most frequent values) of sorted map
-  const result: number[] = [sortedMapByKey.keys().next().value];
-  const cnt = sortedMapByKey.get(result[0]);
-  sortedMapByKey.delete(result[0]);
-
-  for (const [key, value] of sortedMapByKey.entries()) {
-    if (cnt !== value) {
-      break;
-    }
-    result.push(key);
-  }
-
-  return result;
-};
-
-export const standardDeviation = (array: number[]): number => {
-  if (array.length === 0) return 0;
-
-  const meanValue = mean(array);
-  const deviation: number[] = [];
-
-  array.forEach((v, i) => {
-    deviation[i] = v - meanValue;
-  });
-
-  const variance = ((deviation: number[]): number => {
-    let sum = 0;
-    deviation.forEach((v) => {
-      sum += Math.pow(v, 2);
-    });
-    return sum / deviation.length;
-  })(deviation);
-
-  return Math.sqrt(variance);
-};
-
-export const unique = (array: number[]): number[] => {
-  if (array.length === 0) return array;
-
-  return Array.from(new Set(array));
+  return modes;
 };
